@@ -1,0 +1,1 @@
+export const ROLE_OPTIONS = ["PLAYER", "VENUE_ADMIN"] as const

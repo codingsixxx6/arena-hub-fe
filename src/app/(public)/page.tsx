@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "../../components/layout/navbar";
 import Hero from "../../components/landing/hero";
 import About from "@/components/landing/about";
 import Courts from "@/components/landing/courts";

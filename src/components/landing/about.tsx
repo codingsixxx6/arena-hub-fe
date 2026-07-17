@@ -1,37 +1,13 @@
-import { Building2, Coffee, Car, ShowerHead } from "lucide-react";
 import Image from "next/image";
+import DynamicIcon from "../layout/DynamicIcons";
+import { Facility } from "@/types/venue.types";
 
-const facilities = [
-  {
-    icon: Building2,
-    title: "Premium Courts",
-    description:
-      "Lapangan padel berstandar internasional dengan permukaan berkualitas tinggi.",
-    Image: "images/Premium-court.png",
-  },
-  {
-    icon: Coffee,
-    title: "Cafe & Lounge",
-    description:
-      "Area santai yang nyaman untuk bersantai sebelum maupun sesudah bermain.",
-    Image: "images/Cafe-lounge.png",
-  },
-  {
-    icon: ShowerHead,
-    title: "Shower Room",
-    description: "Ruang bilas yang bersih dan nyaman untuk seluruh pemain.",
-    Image: "images/Shower-room.png",
-  },
-  {
-    icon: Car,
-    title: "Free Parking",
-    description:
-      "Area parkir yang luas dan aman untuk kendaraan roda dua maupun roda empat.",
-    Image: "images/Free-parking.png",
-  },
-];
+interface AboutProps {
+  facilities: Facility[] | undefined
+}
 
-export default function About() {
+export default function About({facilities}: AboutProps) {
+
   return (
     <section id="about" className="relative overflow-hidden bg-[#020617] py-28">
       {/* Glow Background */}
@@ -70,23 +46,23 @@ export default function About() {
           {/* Right */}
 
           <div className="grid gap-6 sm:grid-cols-2">
-            {facilities.map((item) => (
+            {facilities?.map((item) => (
               <div
-                key={item.title}
+                key={item.name}
                 className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-lime-400/40 hover:bg-slate-900"
               >
                 <Image
-                  src={`/${item.Image}`}
-                  alt={item.title}
+                  src={item.imageUrl}
+                  alt={item.name}
                   fill
                   className="absolute inset-0 -z-10 object-cover opacity-75 rounded-2xl"
                 />
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-400/10 text-lime-400 transition group-hover:bg-lime-400 group-hover:text-slate-900">
-                  <item.icon size={28} />
+                  <DynamicIcon name={item.icon} size={28} />
                 </div>
 
                 <h3 className="mt-6 text-2xl font-semibold text-white">
-                  {item.title}
+                  {item.name}
                 </h3>
 
                 <p className="mt-3 leading-7 text-xl text-slate-300">

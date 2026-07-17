@@ -1,51 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Star, Users, Clock3, ArrowRight } from "lucide-react";
+import { Court } from "@/types/venue.types";
+import { formatCurrency } from "@/helpers/format.helpers";
 
-const courts = [
-  {
-    id: 1,
-    name: "Court 1",
-    image: "/images/Court-first.png",
-    weekday: "Rp120.000",
-    weekend: "Rp150.000",
-    capacity: "4 Player",
-    time: "08.00 - 23.00",
-    rating: "4.9",
-  },
-  {
-    id: 2,
-    name: "Court 2",
-    image: "/images/Court-second.png",
-    weekday: "Rp120.000",
-    weekend: "Rp150.000",
-    capacity: "4 Player",
-    time: "08.00 - 23.00",
-    rating: "4.9",
-  },
-  {
-    id: 3,
-    name: "Court 3",
-    image: "/images/Court-third.png",
-    weekday: "Rp120.000",
-    weekend: "Rp150.000",
-    capacity: "4 Player",
-    time: "08.00 - 23.00",
-    rating: "4.9",
-  },
-  {
-    id: 4,
-    name: "Court 4",
-    image: "/images/Court-fourth.png",
-    weekday: "Rp120.000",
-    weekend: "Rp150.000",
-    capacity: "4 Player",
-    time: "08.00 - 23.00",
-    rating: "4.9",
-  },
-];
+interface CourtsProps {
+  courts: Court[] | undefined;
+}
 
-export default function Courts() {
+export default function Courts({ courts }: CourtsProps) {
   return (
     <section id="courts" className="bg-[#020617] py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -72,16 +33,16 @@ export default function Courts() {
         {/* Cards */}
 
         <div className="grid gap-8 lg:grid-cols-2">
-          {courts.map((court) => (
+          {courts?.map((court) => (
             <div
               key={court.id}
               className="group overflow-hidden rounded-[30px] border border-slate-800 bg-[#111827] transition-all duration-300 hover:-translate-y-2 hover:border-lime-400/50 hover:shadow-[0_0_35px_rgba(200,255,0,.15)]"
             >
               {/* Image */}
 
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-16/10 overflow-hidden">
                 <Image
-                  src={court.image}
+                  src={court.imageUrl}
                   alt={court.name}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-110"
@@ -101,60 +62,22 @@ export default function Courts() {
                       {court.name}
                     </h3>
 
-                    <p className="mt-1 text-xl text-slate-300">Premium Indoor Court</p>
+                    <p className="mt-1 text-xl text-slate-300">
+                      {court.sportType}
+                    </p>
                   </div>
 
                   <span className="rounded-full bg-lime-400/10 px-4 py-2 text-xl font-semibold text-lime-400">
-                    Available
+                    {court.status}
                   </span>
-                </div>
-
-                {/* Info */}
-
-                <div className="mt-8 flex flex-wrap gap-6 text-sm">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Star size={18} className="text-lime-400" />
-                    {court.rating}
-                  </div>
-
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Users size={18} className="text-lime-400" />
-                    {court.capacity}
-                  </div>
-
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Clock3 size={18} className="text-lime-400" />
-                    {court.time}
-                  </div>
                 </div>
 
                 {/* Pricing */}
 
                 <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/50 p-5">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xl text-slate-300">Weekday</p>
-
-                      <h4 className="mt-1 text-xl font-semibold text-white">
-                        {court.weekday}
-                        <span className="text-base font-normal text-slate-300">
-                          {" "}
-                          / hour
-                        </span>
-                      </h4>
-                    </div>
-
-                    <div className="text-right">
-                      <p className="text-xl text-slate-300">Weekend</p>
-
-                      <h4 className="mt-1 text-xl font-semibold text-lime-400">
-                        {court.weekend}
-                        <span className="text-base font-normal text-slate-300">
-                          {" "}
-                          / hour
-                        </span>
-                      </h4>
-                    </div>
+                    <div>Price per Hour: </div>
+                    <p className="font-bold text-xl">{formatCurrency(court.pricePerHour)} /hour</p>
                   </div>
                 </div>
               </div>

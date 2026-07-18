@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import Button from "../ui/button";
 
 const navigation = [
   {
@@ -51,12 +52,11 @@ export default function Footer() {
               teman, dan rasakan pengalaman bermain padel terbaik di Arena Hub.
             </p>
 
-            <Link
-              href="/courts"
-              className="mt-10 inline-flex items-center gap-3 rounded-2xl bg-lime-400 px-8 py-4 text-xl font-semibold text-slate-900 transition hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(200,255,0,.35)]"
-            >
-              Book Court
-              <ArrowRight size={20} />
+            <Link href="/courts">
+              <Button className="flex items-center mt-8">
+                Book Court
+                <ArrowRight size={20} />
+              </Button>
             </Link>
           </div>
         </div>
@@ -64,7 +64,10 @@ export default function Footer() {
 
       {/* Footer */}
 
-      <div id="contact" className="mx-auto mt-24 max-w-7xl border-t border-slate-800 px-6 py-16">
+      <div
+        id="contact"
+        className="mx-auto mt-24 max-w-7xl border-t border-slate-800 px-6 py-16"
+      >
         <div className="grid gap-16 lg:grid-cols-4">
           {/* Logo */}
 

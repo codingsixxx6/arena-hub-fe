@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DynamicIcon from "../layout/DynamicIcons";
+import DynamicIcon from "../ui/DynamicIcons";
 import { Facility } from "@/types/venue.types";
 
 interface AboutProps {

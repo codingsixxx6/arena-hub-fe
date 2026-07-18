@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "../ui/button";
 
 interface HeroProps {
   totalCourt: string;
@@ -48,14 +49,9 @@ export default function Hero(props: HeroProps) {
         {/* Button */}
 
         <div className="mt-12 flex flex-col gap-5 sm:flex-row text-xl font-semibold">
-          <Link
-            href="/courts"
-            className="rounded-2xl bg-lime-400 px-8 py-4 font-semibold text-slate-950 transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(200,255,0,.4)]"
-          >
-            Book Court
+          <Link href="/courts">
+            <Button>Book Court</Button>
           </Link>
-
-         
         </div>
 
         {/* Statistics */}

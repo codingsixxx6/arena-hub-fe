@@ -40,6 +40,11 @@ export type BookingDetail = {
   court: {
     id: string;
     name: string;
+    venue: {
+      bankName: string;
+      accountHolder: string;
+      accountNumber: string;
+    };
   };
   date: string;
   startTime: string;

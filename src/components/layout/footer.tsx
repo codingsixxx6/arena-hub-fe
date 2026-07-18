@@ -29,7 +29,7 @@ export default function Footer() {
     <footer className="bg-[#020617] pt-28">
       {/* CTA */}
 
-      <section id="contact" className="mx-auto max-w-7xl px-6">
+      <section className="mx-auto max-w-7xl px-6">
         <div className="relative overflow-hidden rounded-[36px] border border-lime-400/20 bg-gradient-to-br from-lime-400/15 via-slate-900 to-slate-900 p-12 md:p-20">
           {/* Glow */}
 
@@ -52,7 +52,7 @@ export default function Footer() {
             </p>
 
             <Link
-              href="/booking"
+              href="/courts"
               className="mt-10 inline-flex items-center gap-3 rounded-2xl bg-lime-400 px-8 py-4 text-xl font-semibold text-slate-900 transition hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(200,255,0,.35)]"
             >
               Book Court
@@ -64,7 +64,7 @@ export default function Footer() {
 
       {/* Footer */}
 
-      <div className="mx-auto mt-24 max-w-7xl border-t border-slate-800 px-6 py-16">
+      <div id="contact" className="mx-auto mt-24 max-w-7xl border-t border-slate-800 px-6 py-16">
         <div className="grid gap-16 lg:grid-cols-4">
           {/* Logo */}
 

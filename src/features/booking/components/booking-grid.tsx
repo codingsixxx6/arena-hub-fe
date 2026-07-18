@@ -23,15 +23,15 @@ export default function BookingGrid() {
       {/* Header */}
 
       <div className="mb-8">
-        <span className="text-sm font-medium uppercase tracking-widest text-lime-400">
+        <span className="text-xl font-medium uppercase tracking-widest text-lime-400">
           Available Courts
         </span>
 
-        <h2 className="mt-3 text-3xl font-bold text-white">
-          Choose Your Court
+        <h2 className="mt-3 text-5xl font-bold text-white">
+          pilih lapangan kamu 
         </h2>
 
-        <p className="mt-2 text-slate-400">
+        <p className="mt-2 text-xl text-slate-300">
           Pilih lapangan dan jam bermain yang tersedia.
         </p>
       </div>

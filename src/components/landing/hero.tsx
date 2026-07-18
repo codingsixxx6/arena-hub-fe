@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-export default function Hero() {
+interface HeroProps {
+  totalCourt: string;
+}
+export default function Hero(props: HeroProps) {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       {/* Background */}
@@ -18,7 +21,7 @@ export default function Hero() {
 
       {/* Glow */}
 
-      <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-400/10 blur-[180px]" />
+      <div className="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-400/10 blur-[180px]" />
 
       {/* Content */}
 
@@ -28,7 +31,7 @@ export default function Hero() {
         </span>
 
         <h1 className="mt-8 max-w-5xl text-5xl font-extrabold leading-tight md:text-7xl">
-            Tingkatkan Permainanmu
+          Tingkatkan Permainanmu
           <br />
           Bersama{" "}
           <span>
@@ -46,28 +49,21 @@ export default function Hero() {
 
         <div className="mt-12 flex flex-col gap-5 sm:flex-row text-xl font-semibold">
           <Link
-            href="/booking"
+            href="/courts"
             className="rounded-2xl bg-lime-400 px-8 py-4 font-semibold text-slate-950 transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(200,255,0,.4)]"
           >
             Book Court
           </Link>
 
-          <Link
-            href="#facilities"
-            className="rounded-2xl border border-slate-700 bg-white/5 px-8 py-4 font-medium backdrop-blur-md transition hover:border-lime-400"
-          >
-            Explore Facilities
-          </Link>
+         
         </div>
 
         {/* Statistics */}
 
-        <div className="mt-24 grid w-full max-w-5xl grid-cols-2 gap-6 md:grid-cols-4 backdrop-blur-xl">
-          <Stat number="4" label="Premium Courts" />
+        <div className="mt-24 grid w-full max-w-5xl grid-cols-2 gap-6 md:grid-cols-3 backdrop-blur-xl">
+          <Stat number={props.totalCourt} label="Premium Courts" />
 
           <Stat number="5K+" label="Bookings" />
-
-          <Stat number="4.9★" label="Google Rating" />
 
           <Stat number="24/7" label="Online Booking" />
         </div>

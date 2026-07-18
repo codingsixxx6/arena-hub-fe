@@ -56,7 +56,7 @@ export default function BookingCard({
               {court.name}
             </h3>
 
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 text-xl text-slate-300">
               {court.description}
             </p>
 
@@ -77,7 +77,7 @@ export default function BookingCard({
 
         {/* Court Info */}
 
-        <div className="mt-6 flex gap-6">
+        <div className="mt-6 text-xl flex gap-6">
 
           <div className="flex items-center gap-2 text-slate-300">
 
@@ -101,7 +101,7 @@ export default function BookingCard({
 
         {/* Features */}
 
-        <div className="mt-6 grid gap-3">
+        <div className="mt-6 text-xl grid gap-3">
 
           {court.features.map((feature) => (
 
@@ -129,7 +129,7 @@ export default function BookingCard({
 
         <div className="mt-8">
 
-          <h4 className="mb-4 text-lg font-semibold text-white">
+          <h4 className="mb-4 text-xl font-medium text-white">
             Available Time
           </h4>
 

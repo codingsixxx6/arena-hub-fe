@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, MailWarning } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { authLoginInput, authLoginSchema } from "@/features/auth/validations/auth.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,11 +17,14 @@ import { AuthUser } from "@/types/auth.types";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
+
   const router = useRouter();
   const {setUser} = useAuthStore()
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<authLoginInput>({
     resolver: zodResolver(authLoginSchema),
@@ -33,6 +36,7 @@ export default function LoginPage() {
     },
     onSuccess: (res) => {
       const user = res.data.data;
+      setUnverifiedEmail(null); // reset banner kalau sebelumnya sempat muncul
       setUser(user)
       toast.success(res.data.message);
 
@@ -44,7 +48,26 @@ export default function LoginPage() {
       router.replace("/");
     },
     onError: (err: AxiosError<ApiResponse<null>>) => {
-      toast.error(err?.response?.data?.message);
+      if (err?.response?.status === 403) {
+        setUnverifiedEmail(getValues("email"));
+        toast.error(err.response.data?.message ?? "Akun belum diverifikasi");
+        return;
+      }
+
+      setUnverifiedEmail(null);
+      toast.error(err?.response?.data?.message ?? "Login gagal");
+    },
+  });
+
+  const { mutate: resendMutation, isPending: isResending } = useMutation({
+    mutationFn: async (email: string) => {
+      return api.post<ApiResponse<null>>("/auth/resend-verification", { email });
+    },
+    onSuccess: (res) => {
+      toast.success(res.data.message ?? "Email verifikasi terkirim, cek inbox kamu");
+    },
+    onError: (err: AxiosError<ApiResponse<null>>) => {
+      toast.error(err?.response?.data?.message ?? "Gagal mengirim ulang email verifikasi");
     },
   });
 
@@ -78,6 +101,24 @@ export default function LoginPage() {
 
           {/* Form */}
 
+          {unverifiedEmail && (
+            <div className="mb-4 flex items-start gap-3 rounded-2xl border border-amber-400/40 bg-amber-400/10 p-4">
+              <MailWarning className="mt-0.5 shrink-0 text-amber-400" size={18} />
+              <div className="text-sm">
+                <p className="text-amber-200">
+                  Akun <span className="font-semibold">{unverifiedEmail}</span> belum diverifikasi.
+                </p>
+                <button
+                  type="button"
+                  disabled={isResending}
+                  onClick={() => resendMutation(unverifiedEmail)}
+                  className="mt-2 font-semibold text-lime-400 hover:underline disabled:opacity-50"
+                >
+                  {isResending ? "Mengirim..." : "Kirim ulang email verifikasi"}
+                </button>
+              </div>
+            </div>
+          )}
           <form
             className="space-y-5"
             onSubmit={handleSubmit(onSubmit)}

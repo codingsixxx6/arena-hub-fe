@@ -6,6 +6,9 @@ type BookingInformationProps = {
   startTime: string;
   endTime: string;
   totalPrice: number;
+  bankName: string;
+  accountHolder: string
+  accountNumber: string;
 };
 
 export default function BookingInformation({
@@ -14,6 +17,9 @@ export default function BookingInformation({
   startTime,
   endTime,
   totalPrice,
+  bankName,
+  accountHolder,
+  accountNumber
 }: BookingInformationProps) {
   return (
     <section className="rounded-2xl border border-white/10 bg-slate-900 p-6">
@@ -37,6 +43,22 @@ export default function BookingInformation({
 
           <p className="text-right font-medium">
             {startTime} - {endTime}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-gray-400">Bank Name</p>
+
+          <p className="text-right font-medium">
+            {`${accountHolder} - (${bankName})`}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-gray-400">Bank Account Number</p>
+
+          <p className="text-right font-medium">
+            {accountNumber}
           </p>
         </div>
 

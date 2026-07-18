@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { LoaderCircle, LogOut, Menu, UserRound } from "lucide-react";
+import { LogOut, Menu, UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useLogout } from "@/hooks/useLogout";
+import Button from "../ui/button";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,8 +27,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "  " : "bg-transparent"
+      className={`sticky top-0 left-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? " " : "bg-slate-900"
       }`}
     >
       <div className="mx-auto flex h-20 max-w-full items-center justify-between px-6  bg-slate-900/5 backdrop-blur-2xl shadow-2xl">
@@ -66,11 +67,8 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-4 lg:flex text-xl font-semibold">
             {!user && (
-              <Link
-                href="/login"
-                className="rounded-xl border border-slate-700 px-5 py-2.5 text-xl font-semibold transition hover:border-lime-400 hover:text-lime-400"
-              >
-                Login
+              <Link href="/login">
+                <Button>Login</Button>
               </Link>
             )}
             {user && (
@@ -93,8 +91,7 @@ export default function Navbar() {
                       aria-label="Logout"
                     >
                       Log Out
-                        <LogOut size={18} />
-                    
+                      <LogOut size={18} />
                     </button>
                   </div>
                 )}

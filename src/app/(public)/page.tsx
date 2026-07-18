@@ -2,7 +2,7 @@
 import Hero from "../../components/landing/hero";
 import About from "@/components/landing/about";
 import Courts from "@/components/landing/courts";
-import Footer from "@/components/layout/footer";
+import Footer from "@/components/landing/footer";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { ApiResponse } from "@/types/api-response.types";

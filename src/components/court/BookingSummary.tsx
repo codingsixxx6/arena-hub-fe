@@ -1,5 +1,6 @@
 import { formatCurrency, formatTime } from "@/helpers/format.helpers";
 import { CourtAvailability } from "@/types/court.types";
+import Button from "../ui/button";
 
 type BookingSummaryProps = {
   availability: CourtAvailability | undefined;
@@ -85,17 +86,16 @@ export default function BookingSummary({
                 </span>
               </div>
             </div>
-
-            <button
+            <Button
               type="button"
               onClick={onContinueBooking}
               disabled={isCreatingBooking}
-              className="mt-6 w-full rounded-xl bg-lime-400 py-3 font-bold text-black transition hover:bg-lime-300 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full mt-5"
             >
               {isCreatingBooking
                 ? "Creating Booking..."
                 : "Continue Booking"}
-            </button>
+            </Button>
           </>
         )}
       </div>

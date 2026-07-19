@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut, Menu, UserRound } from "lucide-react";
+import { LogOut, Menu, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useLogout } from "@/hooks/useLogout";
@@ -13,19 +13,36 @@ export default function Navbar() {
   const user = useAuthStore((state) => state.user);
   const { logout, isLoggingOut } = useLogout();
   const [userClicked, setUserClicked] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
+
   const onUserClicked = () => {
     setUserClicked(!userClicked);
   };
+
+  // Efek 1: Menangani deteksi scroll untuk efek glassmorphism navbar
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Efek 2: Mengunci scroll layar utama saat mobile menu sedang terbuka
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Pembersihan (cleanup) jika komponen dilepas (unmount) tiba-tiba
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   return (
     <header
@@ -34,9 +51,8 @@ export default function Navbar() {
       }`}
     >
       <div className="h-20 px-6 flex items-center bg-slate-900/5 backdrop-blur-2xl shadow-2xl">
-        <div className="flex justify-between w-full max-w-7xl mx-auto">
+        <div className="flex justify-between w-full max-w-7xl mx-auto items-center">
           {/* Logo */}
-
           <Link
             href="/"
             className="text-3xl font-bold tracking-tight text-white"
@@ -88,8 +104,7 @@ export default function Navbar() {
               )}
             </nav>
 
-            {/* Right */}
-
+            {/* Right Desktop */}
             <div className="hidden items-center gap-4 lg:flex font-semibold">
               {!user && (
                 <Link href="/login">
@@ -100,7 +115,7 @@ export default function Navbar() {
                 <div className="relative">
                   <button
                     onClick={onUserClicked}
-                    className="cursor-pointer border-2 border-white hover:border-2  hover:border-lime-400 rounded-full"
+                    className="cursor-pointer border-2 border-white hover:border-lime-400 rounded-full p-0.5 transition"
                   >
                     <UserRound size={30} color="white" />
                   </button>
@@ -124,13 +139,71 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile */}
-
-          <button className="lg:hidden">
-            <Menu />
+          {/* Mobile Toggle Button */}
+          <button 
+            className="lg:hidden text-white hover:text-lime-400 transition focus:outline-none" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="fixed left-0 top-20 w-full h-[calc(100vh-5rem)] bg-slate-900 px-6 py-4 flex flex-col divide-y divide-white/10 text-white text-xl font-medium overflow-y-auto">
+          <Link 
+            href="/" 
+            className="py-5 hover:text-lime-400 transition" 
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+
+          <Link 
+            href="/courts" 
+            className="py-5 hover:text-lime-400 transition" 
+            onClick={() => setIsOpen(false)}
+          >
+            Explore
+          </Link>
+
+          {user ? (
+            <>
+              <Link 
+                href="/bookings" 
+                className="py-5 hover:text-lime-400 transition" 
+                onClick={() => setIsOpen(false)}
+              >
+                My Bookings
+              </Link>
+
+              <button
+                type="button"
+                disabled={isLoggingOut}
+                onClick={() => {
+                  logout();
+                  setIsOpen(false);
+                }}
+                className="py-5 text-gray-400 transition hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50 flex items-center gap-5 w-full text-left"
+                aria-label="Logout"
+              >
+                Log Out
+                <LogOut size={20} />
+              </button>
+            </>
+          ) : (
+            <Link 
+              href="/login" 
+              className="py-5 text-lime-400 font-semibold" 
+              onClick={() => setIsOpen(false)}
+            >
+              Login Account
+            </Link>
+          )}
+        </div>
+      )}
     </header>
   );
 }

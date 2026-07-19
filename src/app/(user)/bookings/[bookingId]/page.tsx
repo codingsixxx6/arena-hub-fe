@@ -146,6 +146,9 @@ export default function BookingDetailPage() {
           startTime={booking.startTime}
           endTime={booking.endTime}
           totalPrice={booking.totalPrice}
+          bankName={booking.court.venue.bankName}
+          accountHolder={booking.court.venue.accountHolder}
+          accountNumber={booking.court.venue.accountNumber}
         />
 
         {booking.status === "PENDING_PAYMENT" && (

@@ -14,6 +14,7 @@ import { useState } from "react";
 import BookingStatusBadge from "@/components/booking/BookingStatusBadge";
 import BookingInformation from "@/components/booking/BookingInformation";
 
+
 export default function AdminBookingDetailPage() {
   const [rejectReason, setRejectReason] = useState("");
   const { bookingId } = useParams<{

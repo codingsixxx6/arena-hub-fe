@@ -6,9 +6,9 @@ type BookingInformationProps = {
   startTime: string;
   endTime: string;
   totalPrice: number;
-  bankName: string;
-  accountHolder: string
-  accountNumber: string;
+  bankName?: string;
+  accountHolder?: string
+  accountNumber?: string;
 };
 
 export default function BookingInformation({

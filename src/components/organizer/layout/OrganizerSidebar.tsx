@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Building2,
   CalendarDays,
   LayoutDashboard,
+  LayoutGrid,
   LoaderCircle,
   LogOut,
 } from "lucide-react";
@@ -13,16 +15,10 @@ import { useLogout } from "@/hooks/useLogout";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 const navigationItems = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Bookings",
-    href: "/dashboard/bookings",
-    icon: CalendarDays,
-  },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Bookings", href: "/dashboard/bookings", icon: CalendarDays },
+  { label: "Venue Settings", href: "/dashboard/venue", icon: Building2 },
+  { label: "Courts", href: "/dashboard/courts", icon: LayoutGrid },
 ];
 
 type OrganizerSidebarProps = {

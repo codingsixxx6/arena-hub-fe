@@ -18,12 +18,12 @@ export default function Courts({ courts }: CourtsProps) {
           </span>
 
           <h2 className="mt-6 text-4xl font-bold text-white md:text-5xl">
-            pilihlah lapangan
+            Pilihlah Lapangan
             <br />
-            sesuai dengan permainanmu
+            Sesuai Dengan Permainanmu.
           </h2>
 
-          <p className="mt-6 text-xl font-semibold leading-8 text-slate-300">
+          <p className="mt-6 leading-8 text-slate-300">
             Seluruh court di Arena Hub menggunakan standar kualitas yang sama.
             Pilih court favoritmu, lihat jadwal yang tersedia, lalu booking
             hanya dalam beberapa langkah.
@@ -41,12 +41,18 @@ export default function Courts({ courts }: CourtsProps) {
               {/* Image */}
 
               <div className="relative aspect-16/10 overflow-hidden">
-                <Image
-                  src={court.imageUrl}
-                  alt={court.name}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-110"
-                />
+                {court.imageUrl ? (
+                  <Image
+                    src={court.imageUrl}
+                    alt={court.name}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center bg-slate-800 text-gray-400">
+                    No Image
+                  </div>
+                )}
 
                 <div className="absolute" />
               </div>
@@ -77,7 +83,9 @@ export default function Courts({ courts }: CourtsProps) {
                 <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/50 p-5">
                   <div className="flex items-center justify-between">
                     <div>Price per Hour: </div>
-                    <p className="font-bold text-xl">{formatCurrency(court.pricePerHour)} /hour</p>
+                    <p className="font-bold text-xl">
+                      {formatCurrency(court.pricePerHour)} /hour
+                    </p>
                   </div>
                 </div>
               </div>

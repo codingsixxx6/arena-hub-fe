@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
 
-import BookingListSection from "@/components/dashboard/BookingListSection";
-import RevenueChart from "@/components/dashboard/RevenueChart";
-import SummaryCard from "@/components/dashboard/SummaryCard";
+import BookingListSection from "@/components/organizer/dashboard/BookingListSection";
+import RevenueChart from "@/components/organizer/dashboard/RevenueChart";
+import SummaryCard from "@/components/organizer/dashboard/SummaryCard";
 import { formatCurrency } from "@/helpers/format.helpers";
 import { api } from "@/lib/api";
 import { ApiResponse } from "@/types/api-response.types";

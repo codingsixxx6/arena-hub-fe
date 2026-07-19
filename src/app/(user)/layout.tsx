@@ -26,10 +26,10 @@ export default function PlayerLayout({children}: {children: React.ReactNode}){
         return null;
     }
     return (
-        <>
+        <div className="bg-slate-900">
             <Navbar />
 
             {children}
-        </>
+        </div>
     )
 }

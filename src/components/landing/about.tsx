@@ -29,14 +29,14 @@ export default function About({facilities}: AboutProps) {
               Built for Everyone.
             </h2>
 
-            <p className="mt-8 text-xl font-semibold leading-8 text-slate-300">
+            <p className="mt-8 leading-8 text-slate-300">
               Arena Hub menghadirkan pengalaman bermain padel yang modern,
               nyaman, dan profesional. Kami percaya bahwa olahraga bukan hanya
               tentang pertandingan, tetapi juga tentang pengalaman, kenyamanan,
               dan komunitas yang tumbuh bersama.
             </p>
 
-            <p className="mt-6 text-xl font-semibold leading-8 text-slate-300">
+            <p className="mt-6 leading-8 text-slate-300">
               Dengan fasilitas premium, sistem booking online yang mudah, serta
               pelayanan terbaik, Arena Hub menjadi tempat ideal untuk bermain
               bersama teman, keluarga, maupun rekan kerja.
@@ -65,7 +65,7 @@ export default function About({facilities}: AboutProps) {
                   {item.name}
                 </h3>
 
-                <p className="mt-3 leading-7 text-xl text-slate-300">
+                <p className="mt-3 leading-7 text-slate-300">
                   {item.description}
                 </p>
               </div>

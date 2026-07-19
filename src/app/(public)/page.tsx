@@ -7,19 +7,27 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { ApiResponse } from "@/types/api-response.types";
 import { Venue } from "@/types/venue.types";
-import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 
 export default function LandingPage() {
- const [venueData, setVenueData] = useState<Venue>()
- useQuery({
+ 
+ const {data: venueData, isLoading} = useQuery({
     queryKey: ["venue"],
     queryFn: async () => {
       const res = await api.get<ApiResponse<Venue>>("/venue");
-      setVenueData(res.data.data)
       return res.data.data
     }
   })
+
+  if (isLoading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+        <LoaderCircle className="animate-spin" />
+      </main>
+    );
+  }
+
   return (
     <main className="bg-[#020617] text-white overflow-x-hidden">
       <Hero totalCourt={String(venueData?.courts.length)} />

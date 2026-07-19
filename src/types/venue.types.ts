@@ -1,17 +1,5 @@
-export enum SportType {
-  BADMINTON = "BADMINTON",
-  FUTSAL = "FUTSAL",
-  BASKET = "BASKET",
-  MINI_SOCCER = "MINI_SOCCER",
-  TENNIS = "TENNIS",
-  PADEL = "PADEL",
-}
+import { CourtStatus, SportType } from "./court.types";
 
-export enum CourtStatus {
-  AVAILABLE = "AVAILABLE",
-  MAINTENANCE = "MAINTENANCE",
-  INACTIVE = "INACTIVE",
-}
 
 export enum DayOfWeek {
   MONDAY = "MONDAY",
@@ -69,3 +57,41 @@ export type Venue = {
   operatingHours: OperatingHour[];
   courts: Court[];
 };
+
+export type VenueAdminResponse = {
+  id: string;
+  name: string;
+  description: string | null;
+  phoneNumber: string | null;
+  address: string;
+  city: string;
+  bankName: string;
+  accountHolder: string;
+  accountNumber: string;
+  images: VenueImage[];
+  facilities: Facility[];
+  operatingHours: OperatingHour[];
+  courts: Court[];
+}
+
+export interface VenueUpdatePayload {
+  name?: string;
+  description?: string;
+  phoneNumber?: string;
+  address?: string;
+  city?: string;
+  bankName?: string;
+  accountHolder?: string;
+  accountNumber?: string;
+}
+
+export interface VenueForm {
+  name: string;
+  description: string;
+  phoneNumber: string;
+  address: string;
+  city: string;
+  bankName: string;
+  accountHolder: string;
+  accountNumber: string;
+}

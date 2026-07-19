@@ -40,7 +40,7 @@ export default function Hero(props: HeroProps) {
           </span>
         </h1>
 
-        <p className="mt-8 max-w-3xl text-xl font-semibold leading-8 text-slate-300">
+        <p className="mt-8 max-w-3xl text-lg font-semibold leading-8 text-slate-300">
           Nikmati pengalaman bermain padel terbaik dengan lapangan berstandar
           internasional, fasilitas premium, serta sistem booking yang cepat dan
           mudah.
@@ -48,7 +48,7 @@ export default function Hero(props: HeroProps) {
 
         {/* Button */}
 
-        <div className="mt-12 flex flex-col gap-5 sm:flex-row text-xl font-semibold">
+        <div className="mt-12 flex flex-col gap-5 sm:flex-row font-semibold">
           <Link href="/courts">
             <Button>Book Court</Button>
           </Link>

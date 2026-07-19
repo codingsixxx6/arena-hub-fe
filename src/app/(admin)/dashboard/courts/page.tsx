@@ -3,7 +3,6 @@
 import { LoaderCircle, Plus } from "lucide-react";
 
 import { useCourts } from "@/hooks/useCourt";
-import Button from "@/components/ui/button";
 import StatusBadge from "@/components/organizer/court/StatusBadge";
 import { formatCurrency } from "@/helpers/format.helpers";
 import CreateCourtDialog from "@/components/organizer/court/CreateCourtDialog";

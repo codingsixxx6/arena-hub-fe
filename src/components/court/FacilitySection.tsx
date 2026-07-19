@@ -8,8 +8,7 @@ import {
   Toilet,
   Wifi,
 } from "lucide-react";
-
-import { Facility } from "@/src/type/venue.types";
+import { Facility } from "@/types/venue.types";
 
 type FacilitySectionProps = {
   facilities: Facility[];

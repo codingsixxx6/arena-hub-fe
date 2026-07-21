@@ -4,39 +4,37 @@ import {
   authRegisterInput,
   authRegisterSchema,
 } from "@/features/auth/validations/auth.validation";
+import { api } from "@/lib/api";
 import { ApiResponse } from "@/types/api-response.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-
-
 export default function RegisterPage() {
-
-  const route = useRouter()
+  const route = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<authRegisterInput>({
-    resolver: zodResolver(authRegisterSchema)
+    resolver: zodResolver(authRegisterSchema),
   });
-   const {mutate: authRegisterMutation, isPending} = useMutation({
-  mutationFn: async (body: authRegisterInput) => {
-    return await axios.post("http://localhost:8000/api/v1/auth/register", {...body, role: "PLAYER"})
-  },
-  onSuccess: (res) => { 
-    route.push("/login")
-    toast.success(res.data.message)
-  },
-  onError: (err: AxiosError<ApiResponse<null>>) => {
-    toast.error(err.response?.data.message)
-  }
-  })
+  const { mutate: authRegisterMutation, isPending } = useMutation({
+    mutationFn: async (body: authRegisterInput) => {
+      return await api.post("/auth/register", { ...body, role: "PLAYER" });
+    },
+    onSuccess: (res) => {
+      route.push("/login");
+      toast.success(res.data.message);
+    },
+    onError: (err: AxiosError<ApiResponse<null>>) => {
+      toast.error(err.response?.data.message);
+    },
+  });
   return (
     <main
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
@@ -51,10 +49,10 @@ export default function RegisterPage() {
         <div className="rounded-[28px] border-black bg-black-700/30 p-8 shadow-xl backdrop-blur">
           {/* Logo */}
           <div className="text-center mb-8">
-            <Link href={'/'}>
-            <h1 className="text-3xl font-bold text-white">
-              ARENA<span className="text-lime-400">HUB</span>
-            </h1>
+            <Link href={"/"}>
+              <h1 className="text-3xl font-bold text-white">
+                ARENA<span className="text-lime-400">HUB</span>
+              </h1>
             </Link>
 
             <p className="mt-3 text-slate-400 text-sm">
@@ -62,7 +60,10 @@ export default function RegisterPage() {
             </p>
           </div>
 
-          <form onSubmit = {handleSubmit((body) => authRegisterMutation(body))} className="space-y-5">
+          <form
+            onSubmit={handleSubmit((body) => authRegisterMutation(body))}
+            className="space-y-5"
+          >
             {/* Full Name */}
 
             <div>

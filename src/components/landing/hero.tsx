@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "../ui/button";
+import Image from "next/image";
 
 interface HeroProps {
   totalCourt: string;
@@ -9,11 +10,11 @@ export default function Hero(props: HeroProps) {
     <section className="relative flex min-h-screen items-center overflow-hidden">
       {/* Background */}
 
-      <div
+      <Image
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/Background.png')",
-        }}
+        src='/images/Background.png'
+        alt="bg"
+        fill={true}
       />
 
       {/* Overlay */}
